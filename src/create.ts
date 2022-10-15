@@ -1,6 +1,5 @@
 import type { CommandOptions } from './types';
-import inquiry from './interactive/inquiry';
-import template from './interactive/template';
+import { template, inquiry } from './interactive';
 import { fileInfo } from './utils/file';
 import chalk from 'chalk';
 

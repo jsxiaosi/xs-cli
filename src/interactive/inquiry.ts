@@ -47,7 +47,7 @@ const TEMPLATE = {
 
 type AnswersType = keyof typeof TEMPLATE & string;
 
-export default async function inquiry(name: string, option: CommandOptions) {
+export async function inquiry(name: string, option: CommandOptions) {
   let projectName = name;
   let projectType = '';
   const prompts = new Subject();

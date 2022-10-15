@@ -2,10 +2,11 @@ import ora from 'ora';
 import fs from 'fs-extra';
 import { downloadTemplate } from 'giget';
 import type { InquiryData } from '../types';
-import { fileInfo } from '../utils/file';
+import { fileInfo, getPkgInfo } from '../utils/file';
 import chalk from 'chalk';
+import path from 'path';
 
-export default async function template(inquiryData: InquiryData) {
+export async function template(inquiryData: InquiryData) {
   const spinner = ora('Template is being created（模版创建中）......');
   spinner.start();
 
@@ -17,6 +18,10 @@ export default async function template(inquiryData: InquiryData) {
     forceClean: true,
     preferOffline: false,
   });
+
+  const pkg = getPkgInfo(filePath);
+  pkg.name = projectName;
+  fs.writeFileSync(path.join(filePath, `package.json`), JSON.stringify(pkg, null, 2));
 
   const nextSteps = [
     `cd ${projectName}`,
